@@ -3,7 +3,10 @@ from rich import print
 import shutil
 import time
 import sys
+import tempfile
 
+# Get the path to the temporary directory
+temp_dir = tempfile.gettempdir()
 def on_progress(
     stream: Stream, chunk: bytes, bytes_remaining: int
 ) -> None:  # pylint: disable=W0613
@@ -62,5 +65,4 @@ def download_v(url,itag):
     yt = YouTube(url,on_progress_callback=on_progress)
     print("[blue]VideoHarvest...[/blue]")
     stream = yt.streams.get_by_itag(itag)
-    stream.download(output_path="./Videos",filename = stream.default_filename)
-    return stream.default_filename
+    return stream.download(output_path=temp_dir,filename = stream.default_filename)

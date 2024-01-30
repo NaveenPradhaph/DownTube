@@ -3,6 +3,10 @@ from rich import  print
 import shutil
 import time
 import sys
+import tempfile
+
+# Get the path to the temporary directory
+temp_dir = tempfile.gettempdir()
 
 def on_progress(
     stream: Stream, chunk: bytes, bytes_remaining: int
@@ -77,5 +81,4 @@ def download_a(url):
                 highest_quality_stream = stream
 
     stream = yt.streams.get_by_itag(highest_quality_stream.itag)
-    stream.download(output_path="./Audios",filename=stream.default_filename)
-    return stream.default_filename
+    return stream.download(output_path=temp_dir,filename=stream.default_filename)

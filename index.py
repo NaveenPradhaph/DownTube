@@ -5,6 +5,7 @@ from download_audio import download_a
 from pyfiglet import Figlet
 from merge import merge
 from pytube.__main__ import YouTube
+from makefolder import make_downtube
 from rich import print
 figlet = Figlet(font='big')
 def main():
@@ -38,9 +39,11 @@ def main():
     
     selected_option = list(answers.values())
 
-    video_name = download_v(url, selected_option[0])
-    audio_name = download_a(url)
-    merge(video_name,audio_name)
+    video_path = download_v(url, selected_option[0])
+    audio_path = download_a(url)
+    output_path = make_downtube()
+    print(output_path)
+    merge(video_path,audio_path,output_path)
 
 
 
