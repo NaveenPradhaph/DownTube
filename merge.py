@@ -4,12 +4,12 @@ import os
 
 # Get the path to the temporary directory
 
-def merge(video,audio,output_path):
+def merge(video,audio,output_path,title):
     
-    title = os.path.splitext(video)[0]
+    # title = os.path.splitext(video)[0]
 
-    video_clip = VideoFileClip(f"{video}")
-    audio_clip = AudioFileClip(f"{audio}")
+    video_clip = VideoFileClip(video).without_audio()
+    audio_clip = AudioFileClip(audio)
 
 
     final_clip = video_clip.set_audio(audio_clip)

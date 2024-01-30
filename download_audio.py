@@ -3,10 +3,9 @@ from rich import  print
 import shutil
 import time
 import sys
-import tempfile
+import io
 
 # Get the path to the temporary directory
-temp_dir = tempfile.gettempdir()
 
 def on_progress(
     stream: Stream, chunk: bytes, bytes_remaining: int
@@ -81,4 +80,11 @@ def download_a(url):
                 highest_quality_stream = stream
 
     stream = yt.streams.get_by_itag(highest_quality_stream.itag)
-    return stream.download(output_path=temp_dir,filename=stream.default_filename)
+    # audio_buffer = io.BytesIO(stream.stream_to_buffer().read())
+    audio_buffer = io.BytesIO()
+
+    # Download the video content directly into the buffer
+    stream.stream_to_buffer(audio_buffer)
+    return audio_buffer
+
+    # return stream.download(output_path=temp_dir,filename=stream.default_filename)

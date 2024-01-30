@@ -39,11 +39,11 @@ def main():
     
     selected_option = list(answers.values())
 
-    video_path = download_v(url, selected_option[0])
+    video_path,title = download_v(url, selected_option[0])
     audio_path = download_a(url)
     output_path = make_downtube()
     print(output_path)
-    merge(video_path,audio_path,output_path)
+    merge(video_path,audio_path,output_path,title)
 
 
 
