@@ -43,6 +43,8 @@ def main():
     audio_path = download_a(url)
     output_path = make_downtube()
     print(output_path)
+    print(video_path)
+    print(audio_path)
     merge(video_path,audio_path,output_path)
 
 
